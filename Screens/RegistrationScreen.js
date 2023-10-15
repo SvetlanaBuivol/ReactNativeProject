@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
+import { InputField } from "../components/InputField";
 
 const RegistrationScreen = () => {
   const {
@@ -56,16 +57,18 @@ const RegistrationScreen = () => {
                 render={({
                   field: { onChange, onBlur, onFocus, value, name },
                 }) => (
-                  <TextInput
-                    style={[
-                      globalStyles.inputField,
-                      isFocused === name && globalStyles.inputFocused,
-                    ]}
+                  <InputField
+                    // style={[
+                    //   globalStyles.inputField,
+                    //   isFocused === name && globalStyles.inputFocused,
+                    // ]}
+                    name={name}
                     placeholder="Логін"
                     onBlur={() => setIsFocused("")}
                     onFocus={() => setIsFocused(`${name}`)}
                     onChangeText={onChange}
                     value={value}
+                    isFocused={isFocused}
                   />
                 )}
                 name="login"
@@ -76,17 +79,19 @@ const RegistrationScreen = () => {
               <Controller
                 control={control}
                 render={({ field: { onChange, onBlur, value, name } }) => (
-                  <TextInput
-                    style={[
-                      globalStyles.inputField,
-                      isFocused === name && globalStyles.inputFocused,
-                    ]}
+                  <InputField
+                    // style={[
+                    //   globalStyles.inputField,
+                    //   isFocused === name && globalStyles.inputFocused,
+                    // ]}
                     keyboardType="email-address"
                     placeholder="Адреса електронної пошти"
                     onBlur={() => setIsFocused("")}
                     onFocus={() => setIsFocused(`${name}`)}
                     onChangeText={onChange}
                     value={value}
+                    isFocused={isFocused}
+                    name={name}
                   />
                 )}
                 name="email"
@@ -99,28 +104,19 @@ const RegistrationScreen = () => {
               <Controller
                 control={control}
                 render={({ field: { onChange, onBlur, value, name } }) => (
-                  <View
-                    style={[
-                      globalStyles.inputField,
-                      { flexDirection: "row", justifyContent: "space-between" },
-                      isFocused === name && globalStyles.inputFocused,
-                    ]}
-                  >
-                    <TextInput
-                      style={{ fontSize: 16, width: "70%" }}
+                    <InputField
+                      // style={{ fontSize: 16, width: "70%" }}
                       placeholder="Пароль"
                       onBlur={() => setIsFocused("")}
                       onFocus={() => setIsFocused(`${name}`)}
                       onChangeText={onChange}
                       value={value}
-                      secureTextEntry={!isPasswordVisible}
+                      isFocused={isFocused}
+                      name={name}
+                      isPasswordVisible={isPasswordVisible}
+                      togglePasswordVisibility={togglePasswordVisibility}
+                      // secureTextEntry={!isPasswordVisible}
                     />
-                    <TouchableOpacity onPress={togglePasswordVisibility}>
-                      <Text style={{ fontSize: 16 }}>
-                        {isPasswordVisible ? "Приховати" : "Показати"}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
                 )}
                 name="password"
                 rules={{ required: true }}

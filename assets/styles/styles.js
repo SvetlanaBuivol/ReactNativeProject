@@ -7,7 +7,7 @@ const colors = {
     greyBg: "#F6F6F6",
     lineColor: "#e8e8e8",
     orange: '#FF6C00',
-    darcBlue: '#1B4371',
+    darkBlue: '#1B4371',
   },
 };
 
@@ -20,6 +20,12 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 32,
     textAlign: "center",
   },
+  mainText: {
+    fontSize: 16,
+    fontFamily: 'Roboto-Regular',
+    color: colors.color.mainText,
+  },
+
   container: {
     height: "67%",
     marginTop: "auto",
@@ -48,7 +54,6 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.color.greyBg,
     padding: 15,
-    fontSize: 16,
   },
   inputFocused: {
     borderColor: colors.color.orange,
@@ -63,5 +68,6 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 100,
     marginTop: 43,
-  }
+  },
+
 });
