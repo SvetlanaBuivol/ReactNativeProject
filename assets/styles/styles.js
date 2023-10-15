@@ -6,6 +6,8 @@ const colors = {
     secondText: "#BDBDBD",
     greyBg: "#F6F6F6",
     lineColor: "#e8e8e8",
+    orange: '#FF6C00',
+    darcBlue: '#1B4371',
   },
 };
 
@@ -40,7 +42,7 @@ export const globalStyles = StyleSheet.create({
   },
   inputField: {
     height: 50,
-    textAlign: "left",
+    // textAlign: "left",
     borderWidth: 1,
     borderColor: colors.color.lineColor,
     borderRadius: 8,
@@ -48,4 +50,18 @@ export const globalStyles = StyleSheet.create({
     padding: 15,
     fontSize: 16,
   },
+  inputFocused: {
+    borderColor: colors.color.orange,
+    backgroundColor: 'white',
+  },
+  mainButton: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.color.orange,
+    paddingHorizontal: 111,
+    paddingVertical: 16,
+    borderRadius: 100,
+    marginTop: 43,
+  }
 });

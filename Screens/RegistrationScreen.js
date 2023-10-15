@@ -19,9 +19,16 @@ const RegistrationScreen = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      login: "",
+      email: "",
+      password: "",
+    },
+  });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isFocused, setIsFocused] = useState("");
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -36,18 +43,27 @@ const RegistrationScreen = () => {
       style={{ flex: 1 }}
       source={require("../assets/images/background.jpeg")}
     >
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={globalStyles.container}>
             <Text style={globalStyles.headTitle}>Реєстрація</Text>
             <View style={{ gap: 16, width: "100%" }}>
               <Controller
                 control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({
+                  field: { onChange, onBlur, onFocus, value, name },
+                }) => (
                   <TextInput
-                    style={globalStyles.inputField}
+                    style={[
+                      globalStyles.inputField,
+                      isFocused === name && globalStyles.inputFocused,
+                    ]}
                     placeholder="Логін"
-                    onBlur={onBlur}
+                    onBlur={() => setIsFocused("")}
+                    onFocus={() => setIsFocused(`${name}`)}
                     onChangeText={onChange}
                     value={value}
                   />
@@ -59,11 +75,16 @@ const RegistrationScreen = () => {
 
               <Controller
                 control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onChange, onBlur, value, name } }) => (
                   <TextInput
-                    style={globalStyles.inputField}
+                    style={[
+                      globalStyles.inputField,
+                      isFocused === name && globalStyles.inputFocused,
+                    ]}
+                    keyboardType="email-address"
                     placeholder="Адреса електронної пошти"
-                    onBlur={onBlur}
+                    onBlur={() => setIsFocused("")}
+                    onFocus={() => setIsFocused(`${name}`)}
                     onChangeText={onChange}
                     value={value}
                   />
@@ -77,17 +98,19 @@ const RegistrationScreen = () => {
 
               <Controller
                 control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onChange, onBlur, value, name } }) => (
                   <View
                     style={[
                       globalStyles.inputField,
                       { flexDirection: "row", justifyContent: "space-between" },
+                      isFocused === name && globalStyles.inputFocused,
                     ]}
                   >
                     <TextInput
-                      style={{ fontSize: 16 }}
+                      style={{ fontSize: 16, width: "70%" }}
                       placeholder="Пароль"
-                      onBlur={onBlur}
+                      onBlur={() => setIsFocused("")}
+                      onFocus={() => setIsFocused(`${name}`)}
                       onChangeText={onChange}
                       value={value}
                       secureTextEntry={!isPasswordVisible}
@@ -107,7 +130,7 @@ const RegistrationScreen = () => {
 
             <TouchableOpacity
               onPress={handleSubmit(onSubmit)}
-              style={{ minWidth: "17%" }}
+              style={globalStyles.mainButton}
             >
               <Text>Зареєстуватися</Text>
             </TouchableOpacity>
