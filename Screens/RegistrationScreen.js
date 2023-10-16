@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   ImageBackground,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
-import { InputField } from "../components/InputField";
+import { Form } from "../components/Form";
 
 const RegistrationScreen = () => {
   const {
@@ -27,13 +25,6 @@ const RegistrationScreen = () => {
       password: "",
     },
   });
-
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isFocused, setIsFocused] = useState("");
-
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
 
   const onSubmit = (data) => {
     console.log(data);
@@ -51,85 +42,28 @@ const RegistrationScreen = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={globalStyles.container}>
             <Text style={globalStyles.headTitle}>Реєстрація</Text>
-            <View style={{ gap: 16, width: "100%" }}>
-              <Controller
-                control={control}
-                render={({
-                  field: { onChange, onBlur, onFocus, value, name },
-                }) => (
-                  <InputField
-                    // style={[
-                    //   globalStyles.inputField,
-                    //   isFocused === name && globalStyles.inputFocused,
-                    // ]}
-                    name={name}
-                    placeholder="Логін"
-                    onBlur={() => setIsFocused("")}
-                    onFocus={() => setIsFocused(`${name}`)}
-                    onChangeText={onChange}
-                    value={value}
-                    isFocused={isFocused}
-                  />
-                )}
-                name="login"
-                rules={{ required: true }}
-              />
-              {errors.login && <Text>Поле "Логін" обов'язкове</Text>}
-
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value, name } }) => (
-                  <InputField
-                    // style={[
-                    //   globalStyles.inputField,
-                    //   isFocused === name && globalStyles.inputFocused,
-                    // ]}
-                    keyboardType="email-address"
-                    placeholder="Адреса електронної пошти"
-                    onBlur={() => setIsFocused("")}
-                    onFocus={() => setIsFocused(`${name}`)}
-                    onChangeText={onChange}
-                    value={value}
-                    isFocused={isFocused}
-                    name={name}
-                  />
-                )}
-                name="email"
-                rules={{ required: true }}
-              />
-              {errors.email && (
-                <Text>Введіть коректну адресу єлектронної пошти</Text>
-              )}
-
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value, name } }) => (
-                    <InputField
-                      // style={{ fontSize: 16, width: "70%" }}
-                      placeholder="Пароль"
-                      onBlur={() => setIsFocused("")}
-                      onFocus={() => setIsFocused(`${name}`)}
-                      onChangeText={onChange}
-                      value={value}
-                      isFocused={isFocused}
-                      name={name}
-                      isPasswordVisible={isPasswordVisible}
-                      togglePasswordVisibility={togglePasswordVisibility}
-                      // secureTextEntry={!isPasswordVisible}
-                    />
-                )}
-                name="password"
-                rules={{ required: true }}
-              />
-              {errors.password && <Text>Поле "Пароль" обов'язкове</Text>}
+            <Form
+              control={control}
+              errors={errors}
+              onSubmit={handleSubmit(onSubmit)}
+              fields={["login", "email", "password"]}
+              buttonText={"Зареєстуватися"}
+            />
+            <View style={{flexDirection: 'row', marginTop: 16 }}>
+              <Text
+                style={[
+                  globalStyles.mainText,
+                  { color: "#1B4371", justifyContent: "center" },
+                ]}
+              >
+                Вже є акаунт?{" "}
+              </Text>
+              <TouchableOpacity>
+                <Text style={[globalStyles.mainText, { color: "#1B4371" }]}>
+                  Увійти
+                </Text>
+              </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-              onPress={handleSubmit(onSubmit)}
-              style={globalStyles.mainButton}
-            >
-              <Text>Зареєстуватися</Text>
-            </TouchableOpacity>
             <View style={globalStyles.avatarContainer} />
           </View>
         </TouchableWithoutFeedback>

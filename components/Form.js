@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,8 +7,102 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
+import { Controller } from "react-hook-form";
+import { InputField } from "./InputField";
 import { globalStyles } from "../assets/styles/styles";
 
-export const Form = () => {
-    
-}
+export const Form = ({
+  control,
+  errors,
+  onSubmit,
+  fields,
+  buttonText,
+}) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isFocused, setIsFocused] = useState("");
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  return (
+    <View style={{ gap: 16, width: "100%" }}>
+      {fields.includes("login") && (
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, onFocus, value, name } }) => (
+            <InputField
+              name={name}
+              placeholder="Логін"
+              onBlur={() => setIsFocused("")}
+              onFocus={() => setIsFocused(`${name}`)}
+              onChangeText={onChange}
+              value={value}
+              isFocused={isFocused}
+            />
+          )}
+          name="login"
+          rules={{ required: true }}
+        />
+      )}
+      {errors.login && (
+        <Text style={globalStyles.errorText}>Поле "Логін" обов'язкове</Text>
+      )}
+
+      {fields.includes("email") && (
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value, name } }) => (
+            <InputField
+              keyboardType="email-address"
+              placeholder="Адреса електронної пошти"
+              onBlur={() => setIsFocused("")}
+              onFocus={() => setIsFocused(`${name}`)}
+              onChangeText={onChange}
+              value={value}
+              isFocused={isFocused}
+              name={name}
+            />
+          )}
+          name="email"
+          rules={{ required: true, pattern: /^\S+@\S+$/i }}
+        />
+      )}
+      {errors.email && (
+        <Text style={globalStyles.errorText}>
+          Введіть коректну адресу єлектронної пошти
+        </Text>
+      )}
+
+      {fields.includes("password") && (
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value, name } }) => (
+            <InputField
+              placeholder="Пароль"
+              onBlur={() => setIsFocused("")}
+              onFocus={() => setIsFocused(`${name}`)}
+              onChangeText={onChange}
+              value={value}
+              isFocused={isFocused}
+              name={name}
+              isPasswordVisible={isPasswordVisible}
+              togglePasswordVisibility={togglePasswordVisibility}
+            />
+          )}
+          name="password"
+          rules={{ required: true, minLength: 6 }}
+        />
+      )}
+      {errors.password && (
+        <Text style={globalStyles.errorText}>
+          Поле "Пароль" містить мінімум 6 символів
+        </Text>
+      )}
+
+      <TouchableOpacity onPress={onSubmit} style={globalStyles.mainButton}>
+        <Text>{buttonText}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};

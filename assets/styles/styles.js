@@ -25,7 +25,12 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     color: colors.color.mainText,
   },
-
+  errorText: {
+    fontSize: 12,
+    color: "red",
+    fontFamily: "Roboto-Regular",
+    
+  },
   container: {
     height: "67%",
     marginTop: "auto",
@@ -48,7 +53,6 @@ export const globalStyles = StyleSheet.create({
   },
   inputField: {
     height: 50,
-    // textAlign: "left",
     borderWidth: 1,
     borderColor: colors.color.lineColor,
     borderRadius: 8,
