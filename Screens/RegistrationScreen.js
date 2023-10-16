@@ -12,6 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
+import { AvatarContainer } from "../components/AvatarContainer";
 
 const RegistrationScreen = () => {
   const {
@@ -64,7 +65,8 @@ const RegistrationScreen = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <View style={globalStyles.avatarContainer} />
+            {/* <View style={globalStyles.avatarContainer} /> */}
+            <AvatarContainer/>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
