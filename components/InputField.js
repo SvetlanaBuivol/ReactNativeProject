@@ -33,7 +33,7 @@ export const InputField = ({
         value={value}
         name={name}
         onBlur={onBlur}
-        onFocus={onFocus}
+        onFocus={() => onFocus(name)}
         onChangeText={onChangeText}
         keyboardType={keyboardType}
         secureTextEntry={name === "password" ? !isPasswordVisible : false}

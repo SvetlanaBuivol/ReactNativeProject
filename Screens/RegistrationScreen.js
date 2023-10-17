@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -27,6 +27,8 @@ const RegistrationScreen = () => {
     },
   });
 
+  const [isFocused, setIsFocused] = useState("");
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -49,6 +51,9 @@ const RegistrationScreen = () => {
               onSubmit={handleSubmit(onSubmit)}
               fields={["login", "email", "password"]}
               buttonText={"Зареєстуватися"}
+               onBlur={() => setIsFocused("")}
+              onFocus={(field) => setIsFocused(field)}
+              isFocused={isFocused}
             />
             <View style={{flexDirection: 'row', marginTop: 16 }}>
               <Text

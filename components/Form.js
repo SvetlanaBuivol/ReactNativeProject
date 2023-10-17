@@ -17,9 +17,11 @@ export const Form = ({
   onSubmit,
   fields,
   buttonText,
+  onBlur,
+  onFocus,
+  isFocused,
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isFocused, setIsFocused] = useState("");
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -30,12 +32,12 @@ export const Form = ({
       {fields.includes("login") && (
         <Controller
           control={control}
-          render={({ field: { onChange, onBlur, onFocus, value, name } }) => (
+          render={({ field: { onChange, value, name } }) => (
             <InputField
               name={name}
               placeholder="Логін"
-              onBlur={() => setIsFocused("")}
-              onFocus={() => setIsFocused(`${name}`)}
+              onFocus={onFocus}
+              onBlur={onBlur}
               onChangeText={onChange}
               value={value}
               isFocused={isFocused}
@@ -56,8 +58,8 @@ export const Form = ({
             <InputField
               keyboardType="email-address"
               placeholder="Адреса електронної пошти"
-              onBlur={() => setIsFocused("")}
-              onFocus={() => setIsFocused(`${name}`)}
+              onFocus={onFocus}
+              onBlur={onBlur}
               onChangeText={onChange}
               value={value}
               isFocused={isFocused}
@@ -80,8 +82,8 @@ export const Form = ({
           render={({ field: { onChange, onBlur, value, name } }) => (
             <InputField
               placeholder="Пароль"
-              onBlur={() => setIsFocused("")}
-              onFocus={() => setIsFocused(`${name}`)}
+              onFocus={onFocus}
+              onBlur={onBlur}
               onChangeText={onChange}
               value={value}
               isFocused={isFocused}
