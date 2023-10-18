@@ -16,7 +16,7 @@ export const globalStyles = StyleSheet.create({
     fontFamily: "Roboto-Bold",
     fontSize: 30,
     color: colors.color.mainText,
-    marginTop: 92,
+    // marginTop: 92,
     marginBottom: 32,
     textAlign: "center",
   },
@@ -32,8 +32,10 @@ export const globalStyles = StyleSheet.create({
     
   },
   container: {
-    height: "67%",
+    // minHeight: "67%",
     marginTop: "auto",
+    paddingTop: 92,
+    paddingBottom: 78,
     paddingHorizontal: 16,
     alignItems: "center",
     backgroundColor: "white",
@@ -71,7 +73,6 @@ export const globalStyles = StyleSheet.create({
     paddingHorizontal: 111,
     paddingVertical: 16,
     borderRadius: 100,
-    marginTop: 43,
   },
 
 });

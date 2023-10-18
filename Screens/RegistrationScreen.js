@@ -7,12 +7,12 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
-  TouchableOpacity,
 } from "react-native";
 import { useForm } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
 import { AvatarContainer } from "../components/AvatarContainer";
+import { Authorization } from "../components/Authorization";
 
 const RegistrationScreen = () => {
   const {
@@ -27,11 +27,19 @@ const RegistrationScreen = () => {
     },
   });
 
-  const [isFocused, setIsFocused] = useState("");
+  const [isFocused, setIsFocused] = useState(null);
 
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  // const onBlurEvent = () => {
+  //   setIsFocused(null)
+  // };
+
+  // const onFocusEvent = (field) => {
+  //   setIsFocused(field)
+  // };
 
   return (
     <ImageBackground
@@ -43,35 +51,30 @@ const RegistrationScreen = () => {
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={globalStyles.container}>
+          <View
+            style={[
+              globalStyles.container,
+              { paddingBottom: isFocused ? 32 : 78 },
+            ]}
+          >
             <Text style={globalStyles.headTitle}>Реєстрація</Text>
             <Form
               control={control}
               errors={errors}
-              onSubmit={handleSubmit(onSubmit)}
               fields={["login", "email", "password"]}
-              buttonText={"Зареєстуватися"}
-               onBlur={() => setIsFocused("")}
+              onBlur={() => setIsFocused(false)}
               onFocus={(field) => setIsFocused(field)}
               isFocused={isFocused}
             />
-            <View style={{flexDirection: 'row', marginTop: 16 }}>
-              <Text
-                style={[
-                  globalStyles.mainText,
-                  { color: "#1B4371", justifyContent: "center" },
-                ]}
-              >
-                Вже є акаунт?{" "}
-              </Text>
-              <TouchableOpacity>
-                <Text style={[globalStyles.mainText, { color: "#1B4371" }]}>
-                  Увійти
-                </Text>
-              </TouchableOpacity>
-            </View>
-            {/* <View style={globalStyles.avatarContainer} /> */}
-            <AvatarContainer/>
+            {!isFocused && (
+              <Authorization
+                onSubmit={handleSubmit(onSubmit)}
+                buttonText={"Зареєстуватися"}
+                authLink={"Увійти"}
+                authText={"Вже є акаунт?"}
+              />
+            )}
+            <AvatarContainer />
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
