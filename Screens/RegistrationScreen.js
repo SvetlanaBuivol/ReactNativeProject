@@ -33,14 +33,6 @@ const RegistrationScreen = () => {
     console.log(data);
   };
 
-  // const onBlurEvent = () => {
-  //   setIsFocused(null)
-  // };
-
-  // const onFocusEvent = (field) => {
-  //   setIsFocused(field)
-  // };
-
   return (
     <ImageBackground
       style={{ flex: 1 }}
