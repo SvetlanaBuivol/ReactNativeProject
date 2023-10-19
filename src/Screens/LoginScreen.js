@@ -27,7 +27,7 @@ const LoginScreen = () => {
   return (
     <ImageBackground
       style={{ flex: 1 }}
-      source={require("../assets/images/background.jpeg")}
+      source={require("../src/assets/images/background.jpeg")}
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
