@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
 import { Authorization } from "../components/Authorization";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const {
@@ -19,6 +20,8 @@ const LoginScreen = () => {
   });
 
   const [isFocused, setIsFocused] = useState(null);
+
+  const navigation = useNavigation();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -53,6 +56,7 @@ const LoginScreen = () => {
                       {!isFocused && (
               <Authorization
                 onSubmit={handleSubmit(onSubmit)}
+                onPress={() => navigation.navigate("Registration")}
                 buttonText={"Увійти"}
                 authLink={"Зареєструватися"}
                 authText={"Немає акаунту?"}

@@ -13,6 +13,7 @@ import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
 import { AvatarContainer } from "../components/AvatarContainer";
 import { Authorization } from "../components/Authorization";
+import { useNavigation } from "@react-navigation/native";
 
 const RegistrationScreen = () => {
   const {
@@ -29,6 +30,8 @@ const RegistrationScreen = () => {
   });
 
   const [isFocused, setIsFocused] = useState(null);
+
+  const navigation = useNavigation();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -66,6 +69,7 @@ const RegistrationScreen = () => {
                 buttonText={"Зареєстуватися"}
                 authLink={"Увійти"}
                 authText={"Вже є акаунт?"}
+                onPress={() => navigation.navigate("Login")}
               />
             )}
             <AvatarContainer />
