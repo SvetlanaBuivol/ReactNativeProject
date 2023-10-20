@@ -18,6 +18,7 @@ const RegistrationScreen = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -31,6 +32,7 @@ const RegistrationScreen = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
 
   return (

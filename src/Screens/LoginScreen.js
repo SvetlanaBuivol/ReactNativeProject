@@ -9,10 +9,10 @@ const LoginScreen = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      login: "",
       email: "",
       password: "",
     },
@@ -22,6 +22,7 @@ const LoginScreen = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
 
   return (
