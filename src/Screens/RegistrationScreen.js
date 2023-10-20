@@ -36,7 +36,7 @@ const RegistrationScreen = () => {
   return (
     <ImageBackground
       style={{ flex: 1 }}
-      source={require("../src/assets/images/background.jpeg")}
+      source={require("../assets/images/background.jpeg")}
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
