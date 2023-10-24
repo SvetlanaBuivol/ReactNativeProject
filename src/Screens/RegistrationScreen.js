@@ -36,6 +36,7 @@ const RegistrationScreen = () => {
   const onSubmit = (data) => {
     console.log(data);
     reset();
+    navigation.navigate("Posts");
   };
 
   return (
@@ -50,7 +51,7 @@ const RegistrationScreen = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View
             style={[
-              globalStyles.container,
+              globalStyles.authContainer,
               { paddingBottom: isFocused ? 32 : 78 },
             ]}
           >

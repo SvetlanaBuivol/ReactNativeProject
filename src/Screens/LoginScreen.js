@@ -26,6 +26,7 @@ const LoginScreen = () => {
   const onSubmit = (data) => {
     console.log(data);
     reset();
+    navigation.navigate("Posts");
   };
 
   return (
@@ -40,7 +41,7 @@ const LoginScreen = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View
             style={[
-              globalStyles.container,
+              globalStyles.authContainer,
               { paddingBottom: isFocused ? 32 : 145, paddingTop: 32 },
             ]}
                   >

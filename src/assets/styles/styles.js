@@ -6,8 +6,8 @@ const colors = {
     secondText: "#BDBDBD",
     greyBg: "#F6F6F6",
     lineColor: "#e8e8e8",
-    orange: '#FF6C00',
-    darkBlue: '#1B4371',
+    orange: "#FF6C00",
+    darkBlue: "#1B4371",
   },
 };
 
@@ -22,16 +22,27 @@ export const globalStyles = StyleSheet.create({
   },
   mainText: {
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     color: colors.color.mainText,
+  },
+  subTitle: {
+    headerTitleAlign: "center",
+    headerTintColor: colors.color.mainText,
+    headerTitleContainerStyle: {
+      backgroundColor: "#FFFFFF",
+
+    },
+    headerTitleStyle: {
+      fontFamily: "Roboto-Medium",
+      fontSize: 17,
+    },
   },
   errorText: {
     fontSize: 12,
     color: "red",
     fontFamily: "Roboto-Regular",
-    
   },
-  container: {
+  authContainer: {
     // minHeight: "67%",
     marginTop: "auto",
     paddingTop: 92,
@@ -63,16 +74,15 @@ export const globalStyles = StyleSheet.create({
   },
   inputFocused: {
     borderColor: colors.color.orange,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   mainButton: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: colors.color.orange,
     paddingHorizontal: 111,
     paddingVertical: 16,
     borderRadius: 100,
   },
-
 });
