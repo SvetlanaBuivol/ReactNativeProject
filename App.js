@@ -10,10 +10,6 @@ import ProfileScreen from "./src/Screens/ProfileScreen";
 import PostsScreen from "./src/Screens/PostsScreen";
 import CommentsScreen from "./src/Screens/CommentsScreen";
 import CreatePostsScreen from "./src/Screens/CreatePostsScreen";
-import LogOutIcon from "./src/components/Svgs/LogOutIcon";
-import { globalStyles } from "./src/assets/styles/styles";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import LeftIcon from "./src/components/Svgs/LeftIcon";
 import headerOptions from "./src/assets/headerOptions/headerOptions";
 
 const MainStack = createStackNavigator();
@@ -31,7 +27,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Comments">
+      <MainStack.Navigator initialRouteName="Posts">
         <MainStack.Screen
           name="Registration"
           component={RegistrationScreen}
@@ -50,22 +46,26 @@ export default function App() {
         <MainStack.Screen
           name="Posts"
           component={PostsScreen}
-         
-          options={({navigation}) => headerOptions({navigation, title: 'Публікації'})}
+          options={({ navigation }) =>
+            headerOptions({ navigation, title: "Публікації" })
+          }
         />
         <MainStack.Screen
           name="Comments"
           component={CommentsScreen}
-         
-          options={({navigation}) =>headerOptions({navigation, title: "Коментарі"})}
+          options={({ navigation }) =>
+            headerOptions({ navigation, title: "Коментарі" })
+          }
         />
         <MainStack.Screen
           name="CreatePost"
           component={CreatePostsScreen}
-          
-          options={({navigation}) =>headerOptions({navigation, title: "Створити публікацію"})}
+          options={({ navigation }) =>
+            headerOptions({ navigation, title: "Створити публікацію" })
+          }
         />
       </MainStack.Navigator>
+      
       <StatusBar style="auto" />
     </NavigationContainer>
   );

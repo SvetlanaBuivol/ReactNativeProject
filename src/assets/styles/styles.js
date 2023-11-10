@@ -30,7 +30,6 @@ export const globalStyles = StyleSheet.create({
     headerTintColor: colors.color.mainText,
     headerTitleContainerStyle: {
       backgroundColor: "#FFFFFF",
-
     },
     headerTitleStyle: {
       fontFamily: "Roboto-Medium",
