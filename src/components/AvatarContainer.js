@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import SvgAdd from "./Svgs/AddIcon";
+import SvgAdd from "../assets/svgs/Svgs/AddIcon";
 import { globalStyles } from "../assets/styles/styles";
 
 export const AvatarContainer = () => {

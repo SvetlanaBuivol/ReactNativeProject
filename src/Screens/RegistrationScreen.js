@@ -36,7 +36,7 @@ const RegistrationScreen = () => {
   const onSubmit = (data) => {
     console.log(data);
     reset();
-    navigation.navigate("Posts");
+    navigation.navigate("Home");
   };
 
   return (

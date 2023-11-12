@@ -84,4 +84,12 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 100,
   },
+  tabButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.color.orange,
+    width: 70,
+    height: 40,
+    borderRadius: 100,
+  }
 });

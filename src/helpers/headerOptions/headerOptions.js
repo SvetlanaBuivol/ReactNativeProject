@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { globalStyles } from "../styles/styles";
-import LeftIcon from "../../components/Svgs/LeftIcon";
-import LogOutIcon from "../../components/Svgs/LogOutIcon";
+import { globalStyles } from "../../assets/styles/styles";
+import LeftIcon from "../../assets/svgs/Svgs/LeftIcon";
+import LogOutIcon from "../../assets/svgs/Svgs/LogOutIcon";
 
 const headerOptions = ({ navigation, title }) => {
     return {
