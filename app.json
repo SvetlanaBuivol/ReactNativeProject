@@ -15,9 +15,13 @@
       "**/*"
     ],
     "ios": {
+      "infoPlist": {
+         "NSPhotoLibraryUsageDescription": "Access to your photos"
+      },
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["CAMERA_ROLL", "READ_EXTERNAL_STORAGE"],
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +29,14 @@
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
   }
 }

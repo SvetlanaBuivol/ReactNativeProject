@@ -11,15 +11,16 @@ import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
+    const isCreatePostsScreen = route.state?.routes[route.state.index]?.name === 'CreatePosts';
 
   return (
     <Tab.Navigator
       initialRouteName="PostsScreen"
       screenOptions={{
         tabBarShowLabel: false,
-          tabBarStyle: { height: 92, paddingHorizontal: "14%" },
-      }}
+          tabBarStyle: { height: 92, paddingHorizontal: "14%" } ,
+          }}
     >
       <Tab.Screen
         name="Posts"
@@ -34,13 +35,14 @@ const Home = ({ navigation }) => {
       <Tab.Screen
         name="CreatePosts"
         component={CreatePostsScreen}
-        options={{
+              options={{
+            tabBarStyle: {display: 'none'},
           tabBarIcon: ({ color, size }) => (
             <View style={globalStyles.tabButton}>
               <PlusIcon name="add" color={color} size={size} />
             </View>
           ),
-          ...headerOptions({ navigation, title: "Створити публікацію" }),
+            ...headerOptions({ navigation, title: "Створити публікацію" }),
         }}
       />
       <Tab.Screen
