@@ -8,6 +8,8 @@ import MapIcon from "../assets/svgs/Svgs/MapIcon";
 import { globalStyles } from "../assets/styles/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+//AIzaSyAoEXZsOxIuBoEGcnHFmnEY8na8-zaW-gw
+
 const CreatePostsForm = ({ control, errors, onBlur, onFocus, onSubmit }) => {
   return (
     <>
