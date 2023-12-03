@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import RegistrationScreen from "./src/Screens/RegistrationScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
+import MapScreen from "./src/Screens/MapScreen";
 // import ProfileScreen from "./src/Screens/ProfileScreen";
 // import PostsScreen from "./src/Screens/PostsScreen";
 // import CommentsScreen from "./src/Screens/CommentsScreen";
@@ -39,11 +40,11 @@ export default function App() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        {/* <MainStack.Screen
-          name="Profile"
-          component={ProfileScreen}
+        <MainStack.Screen
+          name="MapScreen"
+          component={MapScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
         {/* <MainStack.Screen
           name="Posts"
           component={PostsScreen}

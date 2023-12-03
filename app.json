@@ -18,6 +18,9 @@
       "infoPlist": {
          "NSPhotoLibraryUsageDescription": "Access to your photos"
       },
+      "config": {
+         "googleMaps": {"apiKey": "AIzaSyAoEXZsOxIuBoEGcnHFmnEY8na8-zaW-gw"}
+      },
       "supportsTablet": true
     },
     "android": {

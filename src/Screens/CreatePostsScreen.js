@@ -9,88 +9,18 @@ import CameraIcon from "../assets/svgs/Svgs/CameraIcon";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 
-// const CreatePostsScreen = () => {
-//   const {
-//     control,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({
-//     defaultValues: {
-//       title: "",
-//       location: "",
-//     },
-//   });
-
-//   const onSubmit = (data) => console.log(data);
-
-//   const [cameraPermission, setCameraPermission] = useState(null);
-//   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-//     const [cameraRef, setCameraRef] = useState(null);
-//     const [capturedPhoto, setCapturedPhoto] = useState(null);
-
-//   useEffect(() => {
-//     (async () => {
-//       const { status } = await Camera.requestCameraPermissionsAsync();
-//       await MediaLibrary.requestPermissionsAsync();
-
-//       setCameraPermission(status === "granted");
-//     })();
-//   }, []);
-
-//   if (cameraPermission === null) {
-//     return <View />;
-//   }
-//   if (cameraPermission === false) {
-//     return <Text>No access to camera</Text>;
-//   }
-
-//   return (
-//     <View style={globalStyles.mainContainer}>
-//       <Camera
-//         style={globalStyles.cameraBox}
-//         type={cameraType}
-//         ref={setCameraRef}
-//       >
-//         <TouchableOpacity
-//           style={globalStyles.cameraButton}
-//           onPress={async () => {
-//               if (cameraRef) {
-//                 const { uri } = await cameraRef.takePictureAsync();
-//                 await MediaLibrary.createAssetAsync(uri);
-//               }
-//             }}
-//         >
-//           <CameraIcon />
-//         </TouchableOpacity>
-//       </Camera>
-//       <Text style={[globalStyles.secondaryText, { marginBottom: 32 }]}>
-//         Завантажте фото
-//       </Text>
-//       <CreatePostsForm
-//         control={control}
-//         errors={errors}
-//         onSubmit={handleSubmit(onSubmit)}
-//       />
-//       <TouchableOpacity style={globalStyles.trashButton}>
-//         <TrashIcon />
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
-
 const CreatePostsScreen = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       title: "",
       location: "",
     },
   });
-
-  const onSubmit = (data) => console.log(data);
 
   const [cameraPermission, setCameraPermission] = useState(null);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
@@ -122,6 +52,7 @@ const CreatePostsScreen = () => {
   const deletePhoto = () => {
     setCapturedPhoto(null);
     setShowGallery(false);
+    reset();
   };
 
   if (cameraPermission === null) {
@@ -142,12 +73,10 @@ const CreatePostsScreen = () => {
           ref={(ref) => setCameraRef(ref)}
         >
           {capturedPhoto ? (
-            // <View style={globalStyles.cameraBox}>
               <Image
                 source={{ uri: capturedPhoto }}
                 style={[globalStyles.cameraBox, {marginBottom: 0}]}
               />
-            // </View>
           ) : (
             <TouchableOpacity
               style={globalStyles.cameraButton}
@@ -172,10 +101,12 @@ const CreatePostsScreen = () => {
       >
         Завантажте фото
       </Text>
+
       <CreatePostsForm
         control={control}
         errors={errors}
-        onSubmit={handleSubmit(onSubmit)}
+        photo={capturedPhoto}
+        handleSubmit={handleSubmit}
       />
       <TouchableOpacity style={globalStyles.trashButton} onPress={deletePhoto}>
         <TrashIcon />
