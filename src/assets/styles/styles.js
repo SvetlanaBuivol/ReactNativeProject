@@ -145,5 +145,21 @@ export const globalStyles = StyleSheet.create({
     height: 40,
     borderRadius: 100,
     backgroundColor: colors.color.greyBg,
+  },
+  postTitle: {
+    fontSize: 16,
+    fontFamily: 'Roboto-Medium',
+    color: colors.color.mainText,
+    marginBottom: 8,
+  },
+  postDescr: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  postLocation: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   }
 });

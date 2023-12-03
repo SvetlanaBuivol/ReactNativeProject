@@ -1,16 +1,15 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { globalStyles } from "../assets/styles/styles";
+import { Image } from "react-native";
+import { Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import CommentsSvg from "../assets/svgs/Svgs/MessageIcon";
 import MapIcon from "../assets/svgs/Svgs/MapIcon";
 
-const PostsScreen = ({ route }) => {
-  console.log(route);
-
-  const params = route.params;
-
-  return params ? (
-    <View style={globalStyles.mainContainer}>
+const PostCard = () => {
+    return (
+        <View style={globalStyles.mainContainer}>
       <Image
         source={{ uri: route.params.photo }}
         style={globalStyles.cameraBox}
@@ -26,9 +25,7 @@ const PostsScreen = ({ route }) => {
         </TouchableOpacity>
       </View>
     </View>
-  ) : (
-    <View />
-  );
-};
+    )
+}
 
-export default PostsScreen;
+export default PostCard;

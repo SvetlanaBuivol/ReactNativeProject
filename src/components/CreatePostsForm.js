@@ -34,7 +34,7 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
       console.log('Location: ', locationData, "data: ", data)
       navigation.navigate('Posts', {
         location: locationData.coords,
-        photo,
+        photo: photo,
         title: data.title,
         locationName: data.location,
       })
