@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,14 +8,50 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Image,
 } from "react-native";
+import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker";
 import SvgAdd from "../assets/svgs/Svgs/AddIcon";
 import { globalStyles } from "../assets/styles/styles";
 
-export const AvatarContainer = () => {
-  return (
+export const AvatarContainer = ({openGallery, selectedImage}) => {
+  // const [selectedImage, setSelectedImage] = useState(null);
+
+  // const openImagePickerAsync = async () => {
+  //   const result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //     quality: 1,
+  //   });
+  //   console.log(result.assets.uri);
+  //   if (!result.canceled) {
+  //     setSelectedImage(result.assets[0].uri);
+  //   }
+  // };
+
+  return selectedImage ? (
+    <View
+      style={[globalStyles.avatarContainer, { backgroundColor: "transparent" }]}
+    >
+      <Image
+        source={{ uri: selectedImage }}
+        style={{ width: "100%", height: "100%", borderRadius: 16 }}
+      />
+      <TouchableOpacity
+        style={{ position: "absolute", top: 81, left: 107 }}
+        onPress={openGallery}
+      >
+        <SvgAdd />
+      </TouchableOpacity>
+    </View>
+  ) : (
     <View style={globalStyles.avatarContainer}>
-      <SvgAdd style={{ position: "absolute", top: 81, left: 107 }} />
+      <TouchableOpacity
+        style={{ position: "absolute", top: 81, left: 107 }}
+        onPress={openGallery}
+      >
+        <SvgAdd />
+      </TouchableOpacity>
     </View>
   );
 };

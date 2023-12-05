@@ -8,6 +8,7 @@ const colors = {
     lineColor: "#e8e8e8",
     orange: "#FF6C00",
     darkBlue: "#1B4371",
+    greyText: 'rgba(33, 33, 33, 0.8)'
   },
 };
 
@@ -161,5 +162,20 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
+  },
+  postsUserCardImg: {
+    width: 60,
+    height: 60,
+    borderRadius: 16, 
+  },
+  userNameCard: {
+    fontFamily: 'Roboto-Bold',
+    fontSize: 13,
+    color: colors.color.mainText,
+  },
+  userEmailCard: {
+    fontFamily: 'Roboto-Regular',
+    fontSize: 11,
+    color: colors.color.greyText,
   }
 });

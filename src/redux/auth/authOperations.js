@@ -9,23 +9,28 @@ import { auth } from "../../../config";
 
 export const registerUserAsync = createAsyncThunk(
   "auth/registerUser",
-  async ({ login, email, password }, thunkAPI) => {
+  async ({ login, email, password, avatar }, thunkAPI) => {
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+     
       await updateProfile(auth.currentUser, {
         displayName: login,
+        photoURL: avatar,
       });
-      console.log(response.user);
 
+       console.log(response)
       const userData = {
         uid: response.user.uid,
         displayName: response.user.displayName,
         email: response.user.email,
+        avatar: response.user.photoURL,
       };
+      console.log("userData", userData.avatar)
+      
       return userData;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -43,6 +48,7 @@ export const loginUserAsync = createAsyncThunk(
         uid: response.user.uid,
         displayName: response.user.displayName,
         email: response.user.email,
+        avatar: response.user.photoURL,
       };
       return userData;
     } catch (error) {

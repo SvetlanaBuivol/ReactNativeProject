@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, ImageBackground, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+} from "react-native";
 import { useForm } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
@@ -23,20 +30,24 @@ const LoginScreen = () => {
 
   const [isFocused, setIsFocused] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const onSubmit = async(data) => {
-    try {
-       await dispatch(loginUserAsync({
+  const onSubmit = async (data) => {
+    const response = await dispatch(
+      loginUserAsync({
         email: data.email,
         password: data.password,
-      }))
-    } catch (error) {
-      console.log(error)
+      })
+    );
+    
+    if (response.type === "auth/loginUser/fulfilled") {
+      navigation.navigate("Home");
+    } else {
+      alert("Please check your email or password");
     }
+
     reset();
-    navigation.navigate("Home");
   };
 
   return (
@@ -54,17 +65,17 @@ const LoginScreen = () => {
               globalStyles.authContainer,
               { paddingBottom: isFocused ? 32 : 145, paddingTop: 32 },
             ]}
-                  >
-                      <Text style={globalStyles.headTitle}>Увійти</Text>
-                       <Form
+          >
+            <Text style={globalStyles.headTitle}>Увійти</Text>
+            <Form
               control={control}
               errors={errors}
-              fields={[ "email", "password"]}
+              fields={["email", "password"]}
               onBlur={() => setIsFocused(false)}
               onFocus={(field) => setIsFocused(field)}
               isFocused={isFocused}
-                      />
-                      {!isFocused && (
+            />
+            {!isFocused && (
               <Authorization
                 onSubmit={handleSubmit(onSubmit)}
                 onPress={() => navigation.navigate("Registration")}

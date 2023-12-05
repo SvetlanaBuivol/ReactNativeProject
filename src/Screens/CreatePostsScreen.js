@@ -28,8 +28,6 @@ const CreatePostsScreen = () => {
   const [capturedPhoto, setCapturedPhoto] = useState(null);
   const [showGallery, setShowGallery] = useState(false);
 
- 
-
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();

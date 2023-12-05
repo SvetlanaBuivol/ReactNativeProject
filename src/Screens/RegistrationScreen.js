@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,14 +8,14 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
+import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker";
 import { useForm } from "react-hook-form";
 import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
 import { AvatarContainer } from "../components/AvatarContainer";
 import { Authorization } from "../components/Authorization";
 import { useNavigation } from "@react-navigation/native";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../config";
 import { useDispatch } from "react-redux";
 import { registerUserAsync } from "../redux/auth/authOperations";
 
@@ -34,23 +34,44 @@ const RegistrationScreen = () => {
   });
 
   const [isFocused, setIsFocused] = useState(null);
+   const [selectedImage, setSelectedImage] = useState(null);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  useEffect(() => {
+    (async () => {
+      await MediaLibrary.requestPermissionsAsync()
+    })();
+  }, [])
+
+  const openImagePickerAsync = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
+
   const onSubmit = async (data) => {
-    try {
-       await dispatch(registerUserAsync({
+    const result = await dispatch(
+      registerUserAsync({
         login: data.login,
         email: data.email,
         password: data.password,
-      }))
-    } catch (error) {
-      console.log(error)
+        avatar: selectedImage,
+      })
+    );
+    if (result.type === "auth/registerUser/fulfilled") {
+      navigation.navigate("Home");
+      reset();
+      setSelectedImage(null)
+    } else {
+      alert("Oops, something went wrong");
     }
-    // console.log(data.email);
-    reset();
-    navigation.navigate("Home");
   };
 
   return (
@@ -87,7 +108,7 @@ const RegistrationScreen = () => {
                 onPress={() => navigation.navigate("Login")}
               />
             )}
-            <AvatarContainer />
+            <AvatarContainer openGallery={openImagePickerAsync} selectedImage={selectedImage} />
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

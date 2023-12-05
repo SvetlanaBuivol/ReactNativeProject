@@ -8,6 +8,8 @@ import { globalStyles } from "../assets/styles/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from 'expo-location';
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserId } from "../redux/auth/authSelectors";
 // import LocationInput from "./LocationInput";
 
 //AIzaSyAoEXZsOxIuBoEGcnHFmnEY8na8-zaW-gw
@@ -15,6 +17,8 @@ import * as Location from 'expo-location';
 const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit }) => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false)
+
+  const userId = useSelector(selectUserId)
   
   const navigation = useNavigation();
 
