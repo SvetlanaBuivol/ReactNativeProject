@@ -5,6 +5,8 @@ import { globalStyles } from "../assets/styles/styles";
 import { Form } from "../components/Form";
 import { Authorization } from "../components/Authorization";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { loginUserAsync } from "../redux/auth/authOperations";
 
 const LoginScreen = () => {
   const {
@@ -21,10 +23,18 @@ const LoginScreen = () => {
 
   const [isFocused, setIsFocused] = useState(null);
 
+  const dispatch = useDispatch()
   const navigation = useNavigation();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async(data) => {
+    try {
+       await dispatch(loginUserAsync({
+        email: data.email,
+        password: data.password,
+      }))
+    } catch (error) {
+      console.log(error)
+    }
     reset();
     navigation.navigate("Home");
   };

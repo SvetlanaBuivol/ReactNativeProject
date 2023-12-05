@@ -11,9 +11,9 @@ import Home from "../Screens/Home";
 const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
-    return (
-        <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Home">
+  return (
+    <NavigationContainer>
+      <MainStack.Navigator initialRouteName="Registration">
         <MainStack.Screen
           name="Registration"
           component={RegistrationScreen}
@@ -58,7 +58,7 @@ const AppNavigation = () => {
       </MainStack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
-    )
-}
+  );
+};
 
 export default AppNavigation;

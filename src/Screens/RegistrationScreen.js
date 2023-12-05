@@ -14,6 +14,10 @@ import { Form } from "../components/Form";
 import { AvatarContainer } from "../components/AvatarContainer";
 import { Authorization } from "../components/Authorization";
 import { useNavigation } from "@react-navigation/native";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../config";
+import { useDispatch } from "react-redux";
+import { registerUserAsync } from "../redux/auth/authOperations";
 
 const RegistrationScreen = () => {
   const {
@@ -31,10 +35,20 @@ const RegistrationScreen = () => {
 
   const [isFocused, setIsFocused] = useState(null);
 
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+       await dispatch(registerUserAsync({
+        login: data.login,
+        email: data.email,
+        password: data.password,
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+    // console.log(data.email);
     reset();
     navigation.navigate("Home");
   };

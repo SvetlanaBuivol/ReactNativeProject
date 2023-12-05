@@ -31,7 +31,7 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
 
       const locationData = await Location.getCurrentPositionAsync({})
       setLocation(locationData)
-      console.log('Location: ', locationData, "data: ", data)
+
       navigation.navigate('Posts', {
         location: locationData.coords,
         photo: photo,

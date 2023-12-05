@@ -5,7 +5,6 @@ import CommentsSvg from "../assets/svgs/Svgs/MessageIcon";
 import MapIcon from "../assets/svgs/Svgs/MapIcon";
 
 const PostsScreen = ({ route }) => {
-  console.log(route);
 
   const params = route.params;
 
