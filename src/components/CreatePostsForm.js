@@ -8,13 +8,15 @@ import { globalStyles } from "../assets/styles/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from 'expo-location';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUserId } from "../redux/auth/authSelectors";
+import { createPost } from "../redux/posts/createPost";
+
 // import LocationInput from "./LocationInput";
 
 //AIzaSyAoEXZsOxIuBoEGcnHFmnEY8na8-zaW-gw
 
-const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit }) => {
+const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit, resetPostData }) => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false)
 
@@ -22,7 +24,7 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
   
   const navigation = useNavigation();
 
-  const handleGetLocation = async (data) => {
+  const handleAddPost = async (data) => {
     try {
       setLoading(true)
 
@@ -36,12 +38,16 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
       const locationData = await Location.getCurrentPositionAsync({})
       setLocation(locationData)
 
-      navigation.navigate('Posts', {
+      const newPost = await createPost({
         location: locationData.coords,
         photo: photo,
         title: data.title,
         locationName: data.location,
+        userId,
       })
+
+      navigation.navigate('Posts', { newPost })
+      resetPostData()
     } catch (error) {
       console.error('Error getting location: ', error)
     } finally {
@@ -93,7 +99,7 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
       {errors.location && <Text>This is required.</Text>}
 
 
-          <TouchableOpacity style={globalStyles.createPostButton} onPress={handleSubmit(handleGetLocation)}>
+          <TouchableOpacity style={globalStyles.createPostButton} onPress={handleSubmit(handleAddPost)}>
         <Text style={globalStyles.secondaryText}>{!loading ? 'Опубліковати' : 'Завантаження...'}</Text>
       </TouchableOpacity>
     </>

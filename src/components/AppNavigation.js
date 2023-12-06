@@ -7,13 +7,16 @@ import RegistrationScreen from "../Screens/RegistrationScreen";
 import LoginScreen from "../Screens/LoginScreen";
 import MapScreen from "../Screens/MapScreen";
 import Home from "../Screens/Home";
+import { useSelector } from "react-redux";
+import { selectIsAuth } from "../redux/auth/authSelectors";
 
 const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
+  const isAuth = useSelector(selectIsAuth)
   return (
     <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Registration">
+      <MainStack.Navigator initialRouteName={isAuth ? 'Home' : "Registration"}>
         <MainStack.Screen
           name="Registration"
           component={RegistrationScreen}

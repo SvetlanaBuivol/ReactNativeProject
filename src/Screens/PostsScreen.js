@@ -13,24 +13,28 @@ import { fetchUserPosts } from "../redux/posts/fetchPosts";
 import PostCard from "../components/PostCard";
 import { ScrollView } from "react-native";
 
-const PostsScreen = () => {
+const PostsScreen = ({ route }) => {
+  const {newPost} = route.params || {}
   const avatar = useSelector(selectUserAvatar);
   const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
   const userId = useSelector(selectUserId);
   const [userPosts, setUserPosts] = useState([]);
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const posts = await fetchUserPosts(userId);
+
         setUserPosts(posts);
       } catch (error) {
         console.error("Error fetching posts: ", error);
       }
     };
     fetchData();
-  }, [userId]);
+  }, [userId, newPost]);
 
   return (
     <View style={globalStyles.mainContainer}>

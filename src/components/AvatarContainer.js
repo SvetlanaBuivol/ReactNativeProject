@@ -16,18 +16,6 @@ import SvgAdd from "../assets/svgs/Svgs/AddIcon";
 import { globalStyles } from "../assets/styles/styles";
 
 export const AvatarContainer = ({openGallery, selectedImage}) => {
-  // const [selectedImage, setSelectedImage] = useState(null);
-
-  // const openImagePickerAsync = async () => {
-  //   const result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
-  //     quality: 1,
-  //   });
-  //   console.log(result.assets.uri);
-  //   if (!result.canceled) {
-  //     setSelectedImage(result.assets[0].uri);
-  //   }
-  // };
 
   return selectedImage ? (
     <View

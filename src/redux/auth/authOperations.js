@@ -22,14 +22,12 @@ export const registerUserAsync = createAsyncThunk(
         photoURL: avatar,
       });
 
-       console.log(response)
       const userData = {
         uid: response.user.uid,
         displayName: response.user.displayName,
         email: response.user.email,
         avatar: response.user.photoURL,
       };
-      console.log("userData", userData.avatar)
       
       return userData;
     } catch (error) {

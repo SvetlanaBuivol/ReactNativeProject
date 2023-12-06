@@ -49,7 +49,7 @@ const CreatePostsScreen = () => {
     }
   };
 
-  const deletePhoto = () => {
+  const resetPostData = () => {
     setCapturedPhoto(null);
     setShowGallery(false);
     reset();
@@ -107,8 +107,9 @@ const CreatePostsScreen = () => {
         errors={errors}
         photo={capturedPhoto}
         handleSubmit={handleSubmit}
+        resetPostData={resetPostData}
       />
-      <TouchableOpacity style={globalStyles.trashButton} onPress={deletePhoto}>
+      <TouchableOpacity style={globalStyles.trashButton} onPress={resetPostData}>
         <TrashIcon />
       </TouchableOpacity>
     </View>
