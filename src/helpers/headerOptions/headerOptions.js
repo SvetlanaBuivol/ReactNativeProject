@@ -5,6 +5,8 @@ import LeftIcon from "../../assets/svgs/Svgs/LeftIcon";
 import LogOutIcon from "../../assets/svgs/Svgs/LogOutIcon";
 import { useDispatch } from 'react-redux';
 import { logoutUserAsync } from '../../redux/auth/authOperations';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 const headerOptions = ({ navigation, title }) => {
     const dispatch = useDispatch()
@@ -17,6 +19,7 @@ const headerOptions = ({ navigation, title }) => {
             console.error(error)
      }
     }
+    
     return {
         title: title,
         ...globalStyles.subTitle,

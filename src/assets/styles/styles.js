@@ -131,7 +131,6 @@ export const globalStyles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.color.greyBg,
     paddingVertical: 16,
     borderRadius: 100,
     marginTop: 32,

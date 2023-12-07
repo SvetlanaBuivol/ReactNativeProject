@@ -1,18 +1,24 @@
 import React from "react";
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import RegistrationScreen from "../Screens/RegistrationScreen";
 import LoginScreen from "../Screens/LoginScreen";
 import MapScreen from "../Screens/MapScreen";
 import Home from "../Screens/Home";
+import CommentsScreen from "../Screens/CommentsScreen";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../redux/auth/authSelectors";
+import headerOptions from "../helpers/headerOptions/headerOptions";
+import { globalStyles } from "../assets/styles/styles";
+import { TouchableOpacity } from "react-native";
+import LeftIcon from "../assets/svgs/Svgs/LeftIcon";
 
 const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
+  // const navigation = useNavigation()
   const isAuth = useSelector(selectIsAuth)
   return (
     <NavigationContainer>
@@ -30,7 +36,7 @@ const AppNavigation = () => {
         <MainStack.Screen
           name="MapScreen"
           component={MapScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         {/* <MainStack.Screen
           name="Posts"
@@ -39,13 +45,22 @@ const AppNavigation = () => {
             headerOptions({ navigation, title: "Публікації" })
           }
         /> */}
-        {/* <MainStack.Screen
+        <MainStack.Screen
           name="Comments"
           component={CommentsScreen}
-          options={({ navigation }) =>
-            headerOptions({ navigation, title: "Коментарі" })
-          }
-        /> */}
+          // options={({ navigation }) =>
+          //   headerOptions({ navigation, title: "Коментарі" })
+          // }
+          options={({navigation}) => ({ 
+            title: 'Комментарі',
+            ...globalStyles.subTitle,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('Posts')} style={{ marginLeft: 16 }}>
+                <LeftIcon/>
+              </TouchableOpacity>
+            )
+           })}
+        />
         {/* <MainStack.Screen
           name="CreatePost"
           component={CreatePostsScreen}

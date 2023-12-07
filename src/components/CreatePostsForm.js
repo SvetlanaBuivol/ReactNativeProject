@@ -16,7 +16,7 @@ import { createPost } from "../redux/posts/createPost";
 
 //AIzaSyAoEXZsOxIuBoEGcnHFmnEY8na8-zaW-gw
 
-const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit, resetPostData }) => {
+const CreatePostsForm = ({ control, errors, onBlur, onFocus, isValid, photo, handleSubmit, resetPostData }) => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false)
 
@@ -46,7 +46,7 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
         userId,
       })
 
-      navigation.navigate('Posts', { newPost })
+      navigation.navigate('Posts')
       resetPostData()
     } catch (error) {
       console.error('Error getting location: ', error)
@@ -99,8 +99,8 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, photo, handleSubmit
       {errors.location && <Text>This is required.</Text>}
 
 
-          <TouchableOpacity style={globalStyles.createPostButton} onPress={handleSubmit(handleAddPost)}>
-        <Text style={globalStyles.secondaryText}>{!loading ? 'Опубліковати' : 'Завантаження...'}</Text>
+          <TouchableOpacity style={[globalStyles.createPostButton, {backgroundColor: isValid && photo ? '#FF6C00' : '#F6F6F6'}]} onPress={handleSubmit(handleAddPost)} disabled={!isValid}>
+        <Text style={[globalStyles.secondaryText, {color: isValid && photo ? 'white' : '#BDBDBD'}]}>{!loading ? 'Опубліковати' : 'Завантаження...'}</Text>
       </TouchableOpacity>
     </>
   );

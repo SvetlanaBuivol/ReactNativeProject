@@ -12,19 +12,18 @@ import unknownPerson from "../assets/images/unknownPerson.jpg";
 import { fetchUserPosts } from "../redux/posts/fetchPosts";
 import PostCard from "../components/PostCard";
 import { ScrollView } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
-const PostsScreen = ({ route }) => {
-  const {newPost} = route.params || {}
+const PostsScreen = () => {
   const avatar = useSelector(selectUserAvatar);
   const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
   const userId = useSelector(selectUserId);
   const [userPosts, setUserPosts] = useState([]);
 
-
-
-  useEffect(() => {
-    const fetchData = async () => {
+  useFocusEffect(
+    React.useCallback(() => {
+     const fetchData = async () => {
       try {
         const posts = await fetchUserPosts(userId);
 
@@ -34,7 +33,21 @@ const PostsScreen = ({ route }) => {
       }
     };
     fetchData();
-  }, [userId, newPost]);
+  }, [])
+)
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const posts = await fetchUserPosts(userId);
+
+  //       setUserPosts(posts);
+  //     } catch (error) {
+  //       console.error("Error fetching posts: ", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [userId, newPost]);
 
   return (
     <View style={globalStyles.mainContainer}>

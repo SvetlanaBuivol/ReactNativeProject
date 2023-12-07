@@ -13,7 +13,7 @@ const CreatePostsScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, },
     reset,
   } = useForm({
     defaultValues: {
@@ -108,6 +108,7 @@ const CreatePostsScreen = () => {
         photo={capturedPhoto}
         handleSubmit={handleSubmit}
         resetPostData={resetPostData}
+        isValid={isValid}
       />
       <TouchableOpacity style={globalStyles.trashButton} onPress={resetPostData}>
         <TrashIcon />

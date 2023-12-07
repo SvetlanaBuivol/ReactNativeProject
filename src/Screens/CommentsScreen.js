@@ -3,10 +3,11 @@ import {
   View,
   Text,
 } from "react-native";
+import { globalStyles } from "../assets/styles/styles";
 
 const CommentsScreen = () => {
     return (
-        <View>
+        <View style={globalStyles.mainContainer}>
             <Text>CommentsScreen</Text>
         </View>
     )

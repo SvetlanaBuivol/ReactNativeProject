@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
-import {
-  View,
-  Text,
-} from "react-native";
-import MapView from "react-native-maps";
+import { View } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 
-const MapScreen = () => {
-    return (
-    <View style={{flex: 1}}>
-            <MapView style={StyleSheet.absoluteFill}
-                provider='google'
-                showsUserLocation
-                showsMyLocationButton
-            />
+const MapScreen = ({ route }) => {
+  const { postLocation, title } = route.params || {};
+  console.log("MapScreen  postLocation", postLocation)
+
+  return (
+    <View style={{ flex: 1 }}>
+      <MapView
+        style={StyleSheet.absoluteFill}
+        provider="google"
+        showsUserLocation
+        showsMyLocationButton
+        initialRegion={{
+          latitude: postLocation?.latitude,
+          longitude: postLocation?.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+        <Marker coordinate={postLocation} title={title} />
+      </MapView>
     </View>
   );
 };
