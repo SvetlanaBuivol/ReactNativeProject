@@ -15,7 +15,6 @@ export const fetchUserPosts = async (userId) => {
             userPosts.push({ id: doc.id, ...doc.data() });
         });
 
-        console.log('User posts: ', userPosts);
         return userPosts;
     } catch (error) {
         console.error('Error fetching user posts: ', error);

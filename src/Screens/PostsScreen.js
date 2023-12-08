@@ -36,19 +36,6 @@ const PostsScreen = () => {
   }, [])
 )
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const posts = await fetchUserPosts(userId);
-
-  //       setUserPosts(posts);
-  //     } catch (error) {
-  //       console.error("Error fetching posts: ", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [userId, newPost]);
-
   return (
     <View style={globalStyles.mainContainer}>
       <View

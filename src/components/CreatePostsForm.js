@@ -38,7 +38,7 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, isValid, photo, han
       const locationData = await Location.getCurrentPositionAsync({})
       setLocation(locationData)
 
-      const newPost = await createPost({
+      await createPost({
         location: locationData.coords,
         photo: photo,
         title: data.title,

@@ -12,6 +12,7 @@ export const createPost = async ({ photo, location, locationName, title, userId 
             locationName,
             title,
             userId,
+            likes: []
         })
 
         const createdPostSnapshot = await getDoc(docRef)
