@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 // Функція для підключення сховища файлів в проект
 import { getStorage } from "firebase/storage";
+import { onAuthStateChanged } from 'firebase/auth';
 import { getReactNativePersistence } from 'firebase/auth';
 import { initializeAuth } from 'firebase/auth';
 import { ReactNativeAsyncStorage } from '@react-native-async-storage/async-storage';
@@ -13,7 +14,7 @@ import { ReactNativeAsyncStorage } from '@react-native-async-storage/async-stora
 const firebaseConfig = {
   apiKey: 'AIzaSyDHBl1tEw_RuTblD2GGCdEjBbrPa8irE5Y',
   authDomain: 'postscreator.firebaseapp.com',
-  databaseURL: '<https://postscreator-default-rtdb.europe-west1.firebasedatabase.app>',
+  databaseURL: 'https://postscreator-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'postscreator',
   storageBucket: 'postscreator.appspot.com',
   messagingSenderId: '237674469026',

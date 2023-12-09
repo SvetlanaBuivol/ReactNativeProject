@@ -1,13 +1,14 @@
 import * as React from "react";
-const SvgDelete = (props) => (
-  <svg
+import Svg, { Circle, Path } from 'react-native-svg';
+const DeleteIcon = (props) => (
+  <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={37}
     height={37}
     fill="none"
     {...props}
   >
-    <circle
+    <Circle
       cx={18.5}
       cy={18.5}
       r={12}
@@ -15,13 +16,13 @@ const SvgDelete = (props) => (
       stroke="#E8E8E8"
       transform="rotate(-45 18.5 18.5)"
     />
-    <path
+    <Path
       fill="#BDBDBD"
       fillRule="evenodd"
       d="m14.257 13.55-.707.707 4.243 4.243-4.243 4.243.707.707 4.243-4.243 4.243 4.243.707-.707-4.243-4.243 4.243-4.243-.707-.707-4.243 4.243-4.243-4.243Z"
       clipRule="evenodd"
     />
-  </svg>
+  </Svg>
 );
-export default SvgDelete;
+export default DeleteIcon;
 

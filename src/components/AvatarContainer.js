@@ -14,9 +14,10 @@ import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from "expo-image-picker";
 import SvgAdd from "../assets/svgs/Svgs/AddIcon";
 import { globalStyles } from "../assets/styles/styles";
+import DeleteIcon from "../assets/svgs/Svgs/DeleteIcon";
 
-export const AvatarContainer = ({openGallery, selectedImage}) => {
-
+export const AvatarContainer = ({ openGallery, selectedImage }) => {
+  
   return selectedImage ? (
     <View
       style={[globalStyles.avatarContainer, { backgroundColor: "transparent" }]}
@@ -26,17 +27,17 @@ export const AvatarContainer = ({openGallery, selectedImage}) => {
         style={{ width: "100%", height: "100%", borderRadius: 16 }}
       />
       <TouchableOpacity
-        style={{ position: "absolute", top: 81, left: 107 }}
+        style={{ position: "absolute", top: 76, left: 100 }}
         onPress={openGallery}
       >
-        <SvgAdd />
+        <DeleteIcon />
       </TouchableOpacity>
     </View>
   ) : (
     <View style={globalStyles.avatarContainer}>
       <TouchableOpacity
-        style={{ position: "absolute", top: 81, left: 107 }}
-        onPress={openGallery}
+          style={{ position: "absolute", top: 81, left: 107 }}
+          onPress={openGallery}
       >
         <SvgAdd />
       </TouchableOpacity>
