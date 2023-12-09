@@ -7,36 +7,41 @@ import MapIcon from "../assets/svgs/Svgs/MapIcon";
 import { globalStyles } from "../assets/styles/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import * as Location from 'expo-location';
+import * as Location from "expo-location";
 import { useSelector } from "react-redux";
 import { selectUserId } from "../redux/auth/authSelectors";
 import { createPost } from "../redux/posts/createPost";
 
-// import LocationInput from "./LocationInput";
-
-//AIzaSyAoEXZsOxIuBoEGcnHFmnEY8na8-zaW-gw
-
-const CreatePostsForm = ({ control, errors, onBlur, onFocus, isValid, photo, handleSubmit, resetPostData }) => {
+const CreatePostsForm = ({
+  control,
+  errors,
+  onBlur,
+  onFocus,
+  isValid,
+  photo,
+  handleSubmit,
+  resetPostData,
+}) => {
   const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const userId = useSelector(selectUserId)
-  
+  const userId = useSelector(selectUserId);
+
   const navigation = useNavigation();
 
   const handleAddPost = async (data) => {
     try {
-      setLoading(true)
+      setLoading(true);
 
       const { status } = await Location.requestForegroundPermissionsAsync();
-      
-      if (status !== 'granted') {
-        console.error('Permission to access location was denied')
-        return
+
+      if (status !== "granted") {
+        console.error("Permission to access location was denied");
+        return;
       }
 
-      const locationData = await Location.getCurrentPositionAsync({})
-      setLocation(locationData)
+      const locationData = await Location.getCurrentPositionAsync({});
+      setLocation(locationData);
 
       await createPost({
         location: locationData.coords,
@@ -44,16 +49,16 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, isValid, photo, han
         title: data.title,
         locationName: data.location,
         userId,
-      })
+      });
 
-      navigation.navigate('Posts')
-      resetPostData()
+      navigation.navigate("Posts");
+      resetPostData();
     } catch (error) {
-      console.error('Error getting location: ', error)
+      console.error("Error getting location: ", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -83,7 +88,12 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, isValid, photo, han
           required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <View style={[globalStyles.createPostInput, { flexDirection: "row", gap: 4 }]}>
+          <View
+            style={[
+              globalStyles.createPostInput,
+              { flexDirection: "row", gap: 4 },
+            ]}
+          >
             <MapIcon />
             <TextInput
               style={globalStyles.mainText}
@@ -98,9 +108,22 @@ const CreatePostsForm = ({ control, errors, onBlur, onFocus, isValid, photo, han
       />
       {errors.location && <Text>This is required.</Text>}
 
-
-          <TouchableOpacity style={[globalStyles.createPostButton, {backgroundColor: isValid && photo ? '#FF6C00' : '#F6F6F6'}]} onPress={handleSubmit(handleAddPost)} disabled={!isValid}>
-        <Text style={[globalStyles.secondaryText, {color: isValid && photo ? 'white' : '#BDBDBD'}]}>{!loading ? 'Опубліковати' : 'Завантаження...'}</Text>
+      <TouchableOpacity
+        style={[
+          globalStyles.createPostButton,
+          { backgroundColor: isValid && photo ? "#FF6C00" : "#F6F6F6" },
+        ]}
+        onPress={handleSubmit(handleAddPost)}
+        disabled={!isValid}
+      >
+        <Text
+          style={[
+            globalStyles.secondaryText,
+            { color: isValid && photo ? "white" : "#BDBDBD" },
+          ]}
+        >
+          {!loading ? "Опубліковати" : "Завантаження..."}
+        </Text>
       </TouchableOpacity>
     </>
   );

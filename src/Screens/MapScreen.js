@@ -5,7 +5,6 @@ import MapView, { Marker } from "react-native-maps";
 
 const MapScreen = ({ route }) => {
   const { postLocation, title } = route.params || {};
-  console.log("MapScreen  postLocation", postLocation)
 
   return (
     <View style={{ flex: 1 }}>

@@ -1,13 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth, db } from "../../../config";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export const registerUserAsync = createAsyncThunk(
   "auth/registerUser",
@@ -32,14 +31,14 @@ export const registerUserAsync = createAsyncThunk(
             photoURL: avatar,
           });
         }
- const userData = {
-        uid: response.user.uid,
-        displayName: response.user.displayName,
-        email: response.user.email,
-        avatar: response.user.photoURL,
-      };
-      
-      return userData;
+        const userData = {
+          uid: response.user.uid,
+          displayName: response.user.displayName,
+          email: response.user.email,
+          avatar: response.user.photoURL,
+        };
+
+        return userData;
       }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -67,24 +66,21 @@ export const loginUserAsync = createAsyncThunk(
 );
 
 export const logoutUserAsync = createAsyncThunk(
-    'auth/logoutUser',
-    async (_, thunkAPI) => {
-        try {
-            await signOut(auth)
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message)
-        }
+  "auth/logoutUser",
+  async (_, thunkAPI) => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
-)
+  }
+);
 
 export const updateAvatarAsync = createAsyncThunk(
   "auth/updateAvatar",
   async (avatar, thunkAPI) => {
-    console.log("avatar in operations", avatar)
     try {
-
       const user = auth.currentUser;
-      console.log("user", user)
 
       if (user) {
         await updateProfile(user, { photoURL: avatar });
@@ -102,4 +98,4 @@ export const updateAvatarAsync = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);

@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 
 const colors = {
   color: {
@@ -17,7 +17,6 @@ export const globalStyles = StyleSheet.create({
     fontFamily: "Roboto-Bold",
     fontSize: 30,
     color: colors.color.mainText,
-    // marginTop: 92,
     marginBottom: 32,
     textAlign: "center",
   },
@@ -43,7 +42,6 @@ export const globalStyles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
   },
   authContainer: {
-    // minHeight: "67%",
     marginTop: "auto",
     paddingTop: 92,
     paddingBottom: 78,
@@ -165,7 +163,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
-    marginLeft: 'auto',
+    marginLeft: "auto",
   },
   postsUserCardImg: {
     width: 60,
@@ -239,5 +237,4 @@ export const globalStyles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
-  
 });

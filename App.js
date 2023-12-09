@@ -1,8 +1,8 @@
 import "react-native-gesture-handler";
 import React from "react";
 import { useFonts } from "expo-font";
-import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux';
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import AppNavigation from "./src/components/AppNavigation";
 import { Text } from "react-native";

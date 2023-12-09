@@ -43,7 +43,6 @@ const authSlice = createSlice({
         store.loading = true;
       })
       .addCase(loginUserAsync.fulfilled, (store, { payload }) => {
-        console.log("Slice login payload: ", payload);
         const { email, displayName, uid, avatar } = payload;
         store.email = email;
         store.name = displayName;
@@ -70,7 +69,6 @@ const authSlice = createSlice({
         store.error = null;
         store.loading = false;
         store.isAuth = false;
-        console.log(store.isAuth);
       })
       .addCase(logoutUserAsync.rejected, (store) => {
         store.isAuth = true;
@@ -81,7 +79,6 @@ const authSlice = createSlice({
         store.loading = true;
       })
       .addCase(updateAvatarAsync.fulfilled, (store, { payload }) => {
-        console.log("Update slice payload", payload)
         store.avatar = payload.avatar;
         store.error = null;
         store.loading = false;

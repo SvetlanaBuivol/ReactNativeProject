@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { globalStyles } from "../assets/styles/styles";
 
 export const InputField = ({
@@ -28,7 +23,7 @@ export const InputField = ({
       ]}
     >
       <TextInput
-        style={[globalStyles.mainText, {  flex: 1 }]}
+        style={[globalStyles.mainText, { flex: 1 }]}
         placeholder={placeholder}
         value={value}
         name={name}
@@ -40,7 +35,7 @@ export const InputField = ({
       />
       {name === "password" ? (
         <TouchableOpacity onPress={togglePasswordVisibility}>
-          <Text style={[globalStyles.mainText, {color: '#1B4371'}]}>
+          <Text style={[globalStyles.mainText, { color: "#1B4371" }]}>
             {isPasswordVisible ? "Приховати" : "Показати"}
           </Text>
         </TouchableOpacity>

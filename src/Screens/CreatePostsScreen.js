@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useForm } from "react-hook-form";
 import * as MediaLibrary from "expo-media-library";
@@ -13,7 +13,7 @@ const CreatePostsScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid, },
+    formState: { errors, isValid },
     reset,
   } = useForm({
     defaultValues: {
@@ -44,8 +44,8 @@ const CreatePostsScreen = () => {
     });
 
     if (!result.canceled) {
-        setCapturedPhoto(result.assets[0].uri);
-        setShowGallery(true);
+      setCapturedPhoto(result.assets[0].uri);
+      setShowGallery(true);
     }
   };
 
@@ -73,10 +73,10 @@ const CreatePostsScreen = () => {
           ref={(ref) => setCameraRef(ref)}
         >
           {capturedPhoto ? (
-              <Image
-                source={{ uri: capturedPhoto }}
-                style={[globalStyles.cameraBox, {marginBottom: 0}]}
-              />
+            <Image
+              source={{ uri: capturedPhoto }}
+              style={[globalStyles.cameraBox, { marginBottom: 0 }]}
+            />
           ) : (
             <TouchableOpacity
               style={globalStyles.cameraButton}
@@ -85,7 +85,7 @@ const CreatePostsScreen = () => {
                   const { uri } = await cameraRef.takePictureAsync();
                   await MediaLibrary.createAssetAsync(uri);
                   setCapturedPhoto(uri);
-                    setShowGallery(false);
+                  setShowGallery(false);
                 }
               }}
             >
@@ -110,7 +110,10 @@ const CreatePostsScreen = () => {
         resetPostData={resetPostData}
         isValid={isValid}
       />
-      <TouchableOpacity style={globalStyles.trashButton} onPress={resetPostData}>
+      <TouchableOpacity
+        style={globalStyles.trashButton}
+        onPress={resetPostData}
+      >
         <TrashIcon />
       </TouchableOpacity>
     </View>

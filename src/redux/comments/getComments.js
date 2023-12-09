@@ -4,7 +4,7 @@ import { db } from "../../../config";
 export const getComments = async (postId) => {
   try {
     const commentsRef = collection(db, "posts", postId, "comments");
-    const commentsQuery = query(commentsRef, orderBy("createdAt", "asc"));
+    const commentsQuery = query(commentsRef, orderBy("createdAt", "desc"));
     const commentsSnapshot = await getDocs(commentsQuery);
 
     const comments = [];
@@ -15,7 +15,7 @@ export const getComments = async (postId) => {
         ...commentData,
       });
     });
-      return comments
+    return comments;
   } catch (error) {
     console.log("Error fetching comments: ", error);
     throw error;

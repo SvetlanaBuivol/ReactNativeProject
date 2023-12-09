@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Image,
-} from "react-native";
-import * as MediaLibrary from "expo-media-library";
-import * as ImagePicker from "expo-image-picker";
+import React from "react";
+import { View, TouchableOpacity, Image } from "react-native";
 import SvgAdd from "../assets/svgs/Svgs/AddIcon";
 import { globalStyles } from "../assets/styles/styles";
 import DeleteIcon from "../assets/svgs/Svgs/DeleteIcon";
+import { useSelector } from "react-redux";
+import { selectUserAvatar } from "../redux/auth/authSelectors";
 
 export const AvatarContainer = ({ openGallery, selectedImage }) => {
-  
-  return selectedImage ? (
+  const userAvatar = useSelector(selectUserAvatar)
+  return selectedImage || userAvatar ? (
     <View
       style={[globalStyles.avatarContainer, { backgroundColor: "transparent" }]}
     >
       <Image
-        source={{ uri: selectedImage }}
+        source={{ uri: selectedImage ? selectedImage : userAvatar }}
         style={{ width: "100%", height: "100%", borderRadius: 16 }}
       />
       <TouchableOpacity
@@ -36,8 +26,8 @@ export const AvatarContainer = ({ openGallery, selectedImage }) => {
   ) : (
     <View style={globalStyles.avatarContainer}>
       <TouchableOpacity
-          style={{ position: "absolute", top: 81, left: 107 }}
-          onPress={openGallery}
+        style={{ position: "absolute", top: 81, left: 107 }}
+        onPress={openGallery}
       >
         <SvgAdd />
       </TouchableOpacity>

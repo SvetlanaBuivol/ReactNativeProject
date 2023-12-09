@@ -5,7 +5,6 @@ import ProfileScreen from "../Screens/ProfileScreen";
 import UserIcon from "../assets/svgs/Svgs/UserIcon";
 import GridIcon from "../assets/svgs/Svgs/GridIcon";
 import PostsScreen from "../Screens/PostsScreen";
-import headerOptions from "../helpers/headerOptions/headerOptions";
 import { globalStyles } from "../assets/styles/styles";
 import { View } from "react-native";
 import { TouchableOpacity } from "react-native";
@@ -17,19 +16,19 @@ import { logoutUserAsync } from "../redux/auth/authOperations";
 const Tab = createBottomTabNavigator();
 
 const Home = ({ navigation, route }) => {
-  const isCreatePostsScreen =
-    route.state?.routes[route.state.index]?.name === "CreatePosts";
-  
-  const dispatch = useDispatch()
+  // const isCreatePostsScreen =
+  //   route.state?.routes[route.state.index]?.name === "CreatePosts";
 
-    const handleLogout = async () => {
-        try {
-            await dispatch(logoutUserAsync())
-            navigation.navigate('Login')
-        } catch (error) {
-            console.error(error)
-     }
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUserAsync());
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error(error);
     }
+  };
 
   return (
     <Tab.Navigator
@@ -46,34 +45,37 @@ const Home = ({ navigation, route }) => {
           tabBarIcon: ({ color, size }) => (
             <GridIcon name="home" color={color} size={size} />
           ),
-          // ...headerOptions({ navigation, title: "Публікації" }),
-          title: 'Публікації',
+          title: "Публікації",
           headerRight: () => (
-            <TouchableOpacity onPress={handleLogout} style={{marginRight: 16}}>
-                <LogOutIcon />
+            <TouchableOpacity
+              onPress={handleLogout}
+              style={{ marginRight: 16 }}
+            >
+              <LogOutIcon />
             </TouchableOpacity>
-          )
+          ),
         })}
       />
       <Tab.Screen
         name="CreatePosts"
         component={CreatePostsScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           tabBarStyle: { display: "none" },
           tabBarIcon: ({ color, size }) => (
             <View style={globalStyles.tabButton}>
               <PlusIcon name="add" color={color} size={size} />
             </View>
           ),
-            title: 'Комментарі',
-            ...globalStyles.subTitle,
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.navigate('Posts')} style={{ marginLeft: 16 }}>
-                <LeftIcon/>
-              </TouchableOpacity>
-            )
-          
-
+          title: "Комментарі",
+          ...globalStyles.subTitle,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Posts")}
+              style={{ marginLeft: 16 }}
+            >
+              <LeftIcon />
+            </TouchableOpacity>
+          ),
         })}
       />
       <Tab.Screen

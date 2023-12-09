@@ -34,16 +34,16 @@ const RegistrationScreen = () => {
   });
 
   const [isFocused, setIsFocused] = useState(null);
-   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
-      await MediaLibrary.requestPermissionsAsync()
+      await MediaLibrary.requestPermissionsAsync();
     })();
-  }, [])
+  }, []);
 
   const openImagePickerAsync = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -68,7 +68,7 @@ const RegistrationScreen = () => {
     if (result.type === "auth/registerUser/fulfilled") {
       navigation.navigate("Home");
       reset();
-      setSelectedImage(null)
+      setSelectedImage(null);
     } else {
       alert("Oops, something went wrong");
     }
@@ -108,7 +108,10 @@ const RegistrationScreen = () => {
                 onPress={() => navigation.navigate("Login")}
               />
             )}
-            <AvatarContainer openGallery={openImagePickerAsync} selectedImage={selectedImage} />
+            <AvatarContainer
+              openGallery={openImagePickerAsync}
+              selectedImage={selectedImage}
+            />
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

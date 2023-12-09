@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, } from "react-native";
+import { View, Text, Image } from "react-native";
 import { globalStyles } from "../assets/styles/styles";
 import { useSelector } from "react-redux";
 import {
@@ -23,18 +23,18 @@ const PostsScreen = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-     const fetchData = async () => {
-      try {
-        const posts = await fetchUserPosts(userId);
+      const fetchData = async () => {
+        try {
+          const posts = await fetchUserPosts(userId);
 
-        setUserPosts(posts);
-      } catch (error) {
-        console.error("Error fetching posts: ", error);
-      }
-    };
-    fetchData();
-  }, [])
-)
+          setUserPosts(posts);
+        } catch (error) {
+          console.error("Error fetching posts: ", error);
+        }
+      };
+      fetchData();
+    }, [])
+  );
 
   return (
     <View style={globalStyles.mainContainer}>
@@ -66,7 +66,7 @@ const PostsScreen = () => {
         </View>
       </View>
       <View>
-        <ScrollView style={{marginBottom: 32}}>
+        <ScrollView style={{ marginBottom: 32 }}>
           {userPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}

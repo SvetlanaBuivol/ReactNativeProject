@@ -17,22 +17,22 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config";
 
 const PostCard = ({ post, likes }) => {
-  const userId = useSelector(selectUserId)
+  const userId = useSelector(selectUserId);
   const [commentsCount, setCommentsCount] = useState([]);
-  const [likesCount, setLikesCount] = useState(0)
+  const [likesCount, setLikesCount] = useState(0);
 
   useEffect(() => {
-    const postRef = doc(db, 'posts', post.id)
+    const postRef = doc(db, "posts", post.id);
     const unsubscribe = onSnapshot(postRef, (doc) => {
       if (doc.exists()) {
-        const postData = doc.data()
-        setLikesCount(postData.likes.length)
+        const postData = doc.data();
+        setLikesCount(postData.likes.length);
       }
-    })
+    });
     return () => {
-      unsubscribe()
-    }
-  }, [post.id])
+      unsubscribe();
+    };
+  }, [post.id]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -63,12 +63,12 @@ const PostCard = ({ post, likes }) => {
   };
 
   const handleAddLike = async () => {
-    try { 
-      await addLike({postId: post.id, userId})
+    try {
+      await addLike({ postId: post.id, userId });
     } catch (error) {
-      console.error('Error adding like: ', error)
+      console.error("Error adding like: ", error);
     }
-  }
+  };
 
   return (
     <View style={{ marginBottom: 32 }}>
@@ -80,14 +80,21 @@ const PostCard = ({ post, likes }) => {
           style={globalStyles.postCommentsBtn}
         >
           <CommentsSvg color={likes && "#FF6C00"} />
-          <Text style={[globalStyles.secondaryText, likes && {color: '#212121'}]}>
+          <Text
+            style={[globalStyles.secondaryText, likes && { color: "#212121" }]}
+          >
             {commentsCount ? `${commentsCount.length}` : "0"}
           </Text>
         </TouchableOpacity>
         {likes ? (
-          <TouchableOpacity onPress={handleAddLike} style={[globalStyles.postCommentsBtn, {marginLeft: 24}]}>
+          <TouchableOpacity
+            onPress={handleAddLike}
+            style={[globalStyles.postCommentsBtn, { marginLeft: 24 }]}
+          >
             <LikeIcon />
-            <Text style={[globalStyles.secondaryText, {color: '#212121'}]}>{likesCount}</Text>
+            <Text style={[globalStyles.secondaryText, { color: "#212121" }]}>
+              {likesCount}
+            </Text>
           </TouchableOpacity>
         ) : null}
 

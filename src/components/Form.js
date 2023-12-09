@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-} from "react-native";
+import { View, Text } from "react-native";
 import { Controller } from "react-hook-form";
 import { InputField } from "./InputField";
 import { globalStyles } from "../assets/styles/styles";
@@ -22,7 +19,7 @@ export const Form = ({
   };
 
   return (
-    <View style={{width: '100%'}}>
+    <View style={{ width: "100%" }}>
       <View style={{ gap: 16, width: "100%" }}>
         {fields.includes("login") && (
           <Controller

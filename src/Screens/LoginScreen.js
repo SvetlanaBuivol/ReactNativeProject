@@ -40,7 +40,7 @@ const LoginScreen = () => {
         password: data.password,
       })
     );
-    
+
     if (response.type === "auth/loginUser/fulfilled") {
       navigation.navigate("Home");
     } else {

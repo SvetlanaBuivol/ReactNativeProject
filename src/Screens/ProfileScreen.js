@@ -16,12 +16,11 @@ import PostCard from "../components/PostCard";
 import { useFocusEffect } from "@react-navigation/native";
 import { fetchUserPosts } from "../redux/posts/fetchPosts";
 import { useEffect } from "react";
-import { updateAvatarAsync} from "../redux/auth/authOperations";
+import { updateAvatarAsync } from "../redux/auth/authOperations";
 
 const ProfileScreen = () => {
   const userName = useSelector(selectUserName);
   const userId = useSelector(selectUserId);
-  const userAvatar = useSelector(selectUserAvatar);
   const dispatch = useDispatch();
   const [userPosts, setUserPosts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -31,14 +30,14 @@ const ProfileScreen = () => {
       await MediaLibrary.requestPermissionsAsync();
     })();
   }, []);
-    
-    const updateAvatar = async (photo) => {
-        try {
-            await dispatch(updateAvatarAsync(photo))
-        } catch (error) {
-            console.error('Error updating avatar: ', error.message)
-        }
+
+  const updateAvatar = async (photo) => {
+    try {
+      await dispatch(updateAvatarAsync(photo));
+    } catch (error) {
+      console.error("Error updating avatar: ", error.message);
     }
+  };
 
   const openImagePickerAsync = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -47,12 +46,10 @@ const ProfileScreen = () => {
     });
 
     if (!result.canceled) {
-        setSelectedImage(result.assets[0].uri);
-         await updateAvatar(result.assets[0].uri)
-      } 
-    
-    };
-    
+      setSelectedImage(result.assets[0].uri);
+      await updateAvatar(result.assets[0].uri);
+    }
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -75,7 +72,7 @@ const ProfileScreen = () => {
       source={require("../assets/images/background.jpeg")}
     >
       <View style={globalStyles.profileContainer}>
-              <AvatarContainer
+        <AvatarContainer
           openGallery={openImagePickerAsync}
           selectedImage={selectedImage}
         />
